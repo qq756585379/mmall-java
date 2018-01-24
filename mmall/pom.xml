@@ -253,7 +253,7 @@
     <build>
         <finalName>mmall</finalName>
         <plugins>
-            <!-- 自动生成dao,domain,mapper下的xml -->
+            <!-- 自动生成mapper下的xml -->
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>

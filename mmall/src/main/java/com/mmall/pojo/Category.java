@@ -88,13 +88,12 @@ public class Category {
         this.updateTime = updateTime;
     }
 
+    //去重，重写boolean和hashCode，认为id相同就是同一个对象
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Category category = (Category) o;
-
         return !(id != null ? !id.equals(category.id) : category.id != null);
     }
 
