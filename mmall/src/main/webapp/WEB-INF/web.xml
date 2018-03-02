@@ -18,7 +18,6 @@
             <param-value>true</param-value>
         </init-param>
     </filter>
-
     <filter-mapping>
         <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -28,7 +27,6 @@
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
-
     <!-- web容器和spring进行整合的监听器 通过ContextLoaderListener加载applicationContext.xml -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -43,7 +41,7 @@
 
     <!--
     load-on-startup为0或大于0，在web容器初始化的时候会初始化dispatcher，当小于0或者不指定的话只有在使用的时候才去加载dispatcher
-    load-on-startup 表示优先级和启动顺序
+    load-on-startup表示优先级和启动顺序
      -->
     <servlet>
         <servlet-name>dispatcher</servlet-name>

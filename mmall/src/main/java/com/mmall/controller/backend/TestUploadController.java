@@ -1,9 +1,7 @@
 package com.mmall.controller.backend;
 
 import com.google.common.collect.Maps;
-import com.mmall.common.Const;
 import com.mmall.common.ServerResponse;
-import com.mmall.pojo.User;
 import com.mmall.service.IFileService;
 import com.mmall.service.IUserService;
 import com.mmall.util.PropertiesUtil;
