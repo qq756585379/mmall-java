@@ -27,11 +27,7 @@ mybatis-generator需要的mysql包已经放在了tools包下，可以copy出来�
 
 ![Image text](./images/1.png)
 
-3.chome插件需要翻墙（不装了）
 
-restlet可以调试get/post
-
-http://blog.csdn.net/zlp1992/article/details/76706017
 
 
 
