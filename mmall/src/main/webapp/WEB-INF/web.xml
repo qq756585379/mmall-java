@@ -52,7 +52,7 @@
 
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
-        <!--兼容restfull-->
+        <!-- 兼容restfull -->
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 

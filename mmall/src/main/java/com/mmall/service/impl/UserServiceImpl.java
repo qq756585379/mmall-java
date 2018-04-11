@@ -113,7 +113,6 @@ public class UserServiceImpl implements IUserService {
         if (org.apache.commons.lang3.StringUtils.equals(forgetToken, token)) {
             String md5Password = MD5Util.MD5EncodeUtf8(passwordNew);
             int rowCount = userMapper.updatePasswordByUsername(username, md5Password);
-
             if (rowCount > 0) {
                 return ServerResponse.createBySuccessMessage("修改密码成功");
             }

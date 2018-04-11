@@ -20,6 +20,8 @@ public class UserController {
     @Autowired
     private IUserService iUserService;
 
+    //http://localhost:8080/mmall/user/login.do
+    //yjj   123123
     @RequestMapping(value = "login.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session) {
@@ -37,6 +39,8 @@ public class UserController {
         return ServerResponse.createBySuccess();
     }
 
+    //http://localhost:8080/mmall/user/register.do?username=yjj&password=123123
+    // &email=756585379@qq.com&phone=13376275127&question=1+2=&answer=3
     @RequestMapping(value = "register.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> register(User user) {
@@ -49,6 +53,7 @@ public class UserController {
         return iUserService.checkValid(str, type);
     }
 
+    //http://localhost:8080/mmall/user/get_user_info.do
     @RequestMapping(value = "get_user_info.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> getUserInfo(HttpSession session) {
@@ -59,12 +64,14 @@ public class UserController {
         return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
     }
 
+    //http://localhost:8080/mmall/user/forget_get_question.do
     @RequestMapping(value = "forget_get_question.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> forgetGetQuestion(String username) {
         return iUserService.selectQuestion(username);
     }
 
+    //http://localhost:8080/mmall/user/forget_check_answer.do
     @RequestMapping(value = "forget_check_answer.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> forgetCheckAnswer(String username, String question, String answer) {
