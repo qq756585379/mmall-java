@@ -17,6 +17,7 @@ public class ProductController {
     @Autowired
     private IProductService iProductService;
 
+    //http://localhost:8080/mmall/product/detail.do?productId=26
     @RequestMapping("detail.do")
     @ResponseBody
     public ServerResponse<ProductDetailVo> detail(Integer productId) {

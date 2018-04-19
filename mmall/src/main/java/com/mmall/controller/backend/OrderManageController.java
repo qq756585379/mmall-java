@@ -2,7 +2,7 @@ package com.mmall.controller.backend;
 
 import com.github.pagehelper.PageInfo;
 import com.mmall.common.Const;
-import com.mmall.common.ResponseCode;
+import com.mmall.common.ResponseEnum;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
 import com.mmall.service.IOrderService;
@@ -33,7 +33,7 @@ public class OrderManageController {
 
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
         }
         if (iUserService.checkAdminRole(user).isSuccess()) {
             //填充我们增加产品的业务逻辑
@@ -49,7 +49,7 @@ public class OrderManageController {
 
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
         }
         if (iUserService.checkAdminRole(user).isSuccess()) {
             //填充我们增加产品的业务逻辑
@@ -66,7 +66,7 @@ public class OrderManageController {
                                                 @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
         }
         if (iUserService.checkAdminRole(user).isSuccess()) {
             //填充我们增加产品的业务逻辑
@@ -79,10 +79,9 @@ public class OrderManageController {
     @RequestMapping("send_goods.do")
     @ResponseBody
     public ServerResponse<String> orderSendGoods(HttpSession session, Long orderNo) {
-
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
         }
         if (iUserService.checkAdminRole(user).isSuccess()) {
             //填充我们增加产品的业务逻辑

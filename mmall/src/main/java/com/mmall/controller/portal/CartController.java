@@ -1,7 +1,7 @@
 package com.mmall.controller.portal;
 
 import com.mmall.common.Const;
-import com.mmall.common.ResponseCode;
+import com.mmall.common.ResponseEnum;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
 import com.mmall.service.ICartService;
@@ -25,7 +25,7 @@ public class CartController {
     public ServerResponse<CartVo> list(HttpSession session) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), ResponseEnum.NEED_LOGIN.getDesc());
         }
         return iCartService.list(user.getId());
     }
@@ -35,7 +35,7 @@ public class CartController {
     public ServerResponse<CartVo> add(HttpSession session, Integer count, Integer productId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), ResponseEnum.NEED_LOGIN.getDesc());
         }
         return iCartService.add(user.getId(), productId, count);
     }
@@ -45,7 +45,7 @@ public class CartController {
     public ServerResponse<CartVo> update(HttpSession session, Integer count, Integer productId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), ResponseEnum.NEED_LOGIN.getDesc());
         }
         return iCartService.update(user.getId(), productId, count);
     }
@@ -55,7 +55,7 @@ public class CartController {
     public ServerResponse<CartVo> deleteProduct(HttpSession session, String productIds) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), ResponseEnum.NEED_LOGIN.getDesc());
         }
         return iCartService.deleteProduct(user.getId(), productIds);
     }
@@ -65,7 +65,7 @@ public class CartController {
     public ServerResponse<CartVo> selectAll(HttpSession session) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), ResponseEnum.NEED_LOGIN.getDesc());
         }
         return iCartService.selectOrUnSelect(user.getId(), null, Const.Cart.CHECKED);
     }
@@ -75,7 +75,7 @@ public class CartController {
     public ServerResponse<CartVo> unSelectAll(HttpSession session) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), ResponseEnum.NEED_LOGIN.getDesc());
         }
         return iCartService.selectOrUnSelect(user.getId(), null, Const.Cart.UN_CHECKED);
     }
@@ -85,7 +85,7 @@ public class CartController {
     public ServerResponse<CartVo> select(HttpSession session, Integer productId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), ResponseEnum.NEED_LOGIN.getDesc());
         }
         return iCartService.selectOrUnSelect(user.getId(), productId, Const.Cart.CHECKED);
     }
@@ -95,7 +95,7 @@ public class CartController {
     public ServerResponse<CartVo> unSelect(HttpSession session, Integer productId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), ResponseEnum.NEED_LOGIN.getDesc());
         }
         return iCartService.selectOrUnSelect(user.getId(), productId, Const.Cart.UN_CHECKED);
     }

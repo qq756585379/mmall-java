@@ -19,6 +19,8 @@ public class UserManageController {
     @Autowired
     private IUserService iUserService;
 
+    //http://localhost:8080/mmall/manage/user/login.do
+    //yjj   123123
     @RequestMapping(value = "login.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session) {

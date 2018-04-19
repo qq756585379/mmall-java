@@ -30,6 +30,7 @@ public class FileServiceImpl implements IFileService {
             fileDir.setWritable(true);
             fileDir.mkdirs();
         }
+
         File targetFile = new File(path, uploadFileName);
 
         try {
@@ -46,5 +47,4 @@ public class FileServiceImpl implements IFileService {
         //B:abc.jpg
         return targetFile.getName();
     }
-
 }

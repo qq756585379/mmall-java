@@ -2,7 +2,7 @@ package com.mmall.controller.portal;
 
 import com.github.pagehelper.PageInfo;
 import com.mmall.common.Const;
-import com.mmall.common.ResponseCode;
+import com.mmall.common.ResponseEnum;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.Shipping;
 import com.mmall.pojo.User;
@@ -27,7 +27,7 @@ public class ShippingController {
     public ServerResponse add(HttpSession session, Shipping shipping) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), ResponseEnum.NEED_LOGIN.getDesc());
         }
         return iShippingService.add(user.getId(), shipping);
     }
@@ -37,7 +37,7 @@ public class ShippingController {
     public ServerResponse del(HttpSession session, Integer shippingId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), ResponseEnum.NEED_LOGIN.getDesc());
         }
         return iShippingService.del(user.getId(), shippingId);
     }
@@ -47,7 +47,7 @@ public class ShippingController {
     public ServerResponse update(HttpSession session, Shipping shipping) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), ResponseEnum.NEED_LOGIN.getDesc());
         }
         return iShippingService.update(user.getId(), shipping);
     }
@@ -57,7 +57,7 @@ public class ShippingController {
     public ServerResponse<Shipping> select(HttpSession session, Integer shippingId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), ResponseEnum.NEED_LOGIN.getDesc());
         }
         return iShippingService.select(user.getId(), shippingId);
     }
@@ -69,7 +69,7 @@ public class ShippingController {
                                          HttpSession session) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), ResponseEnum.NEED_LOGIN.getDesc());
         }
         return iShippingService.list(user.getId(), pageNum, pageSize);
     }

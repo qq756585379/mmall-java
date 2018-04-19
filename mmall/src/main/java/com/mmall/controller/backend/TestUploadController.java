@@ -29,7 +29,8 @@ public class TestUploadController {
 
     @RequestMapping("upload.do")
     @ResponseBody
-    public ServerResponse upload(HttpSession session, HttpServletRequest request,
+    public ServerResponse upload(HttpSession session,
+                                 HttpServletRequest request,
                                  @RequestParam(value = "upload_file", required = false) MultipartFile file) {
 
         String path = request.getSession().getServletContext().getRealPath("upload");
@@ -37,14 +38,16 @@ public class TestUploadController {
         String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + targetFileName;
 
         Map fileMap = Maps.newHashMap();
-        fileMap.put("urii", targetFileName);
+        fileMap.put("uri", targetFileName);
         fileMap.put("urll", url);
         return ServerResponse.createBySuccess(fileMap);
     }
 
     @RequestMapping("richtext_img_upload.do")
     @ResponseBody
-    public Map richtextImgUpload(HttpSession session, HttpServletRequest request, HttpServletResponse response,
+    public Map richtextImgUpload(HttpSession session,
+                                 HttpServletRequest request,
+                                 HttpServletResponse response,
                                  @RequestParam(value = "upload_file", required = false) MultipartFile file) {
         Map resultMap = Maps.newHashMap();
 

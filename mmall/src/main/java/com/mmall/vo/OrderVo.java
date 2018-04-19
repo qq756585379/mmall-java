@@ -1,7 +1,6 @@
 package com.mmall.vo;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 public class OrderVo {
@@ -13,6 +12,7 @@ public class OrderVo {
     private Integer paymentType;
 
     private String paymentTypeDesc;
+
     private Integer postage;
 
     private Integer status;
@@ -33,7 +33,9 @@ public class OrderVo {
     private List<OrderItemVo> orderItemVoList;
 
     private String imageHost;
+
     private Integer shippingId;
+
     private String receiverName;
 
     private ShippingVo shippingVo;

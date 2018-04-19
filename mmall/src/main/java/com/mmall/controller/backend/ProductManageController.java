@@ -2,7 +2,7 @@ package com.mmall.controller.backend;
 
 import com.google.common.collect.Maps;
 import com.mmall.common.Const;
-import com.mmall.common.ResponseCode;
+import com.mmall.common.ResponseEnum;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.Product;
 import com.mmall.pojo.User;
@@ -39,7 +39,7 @@ public class ProductManageController {
     public ServerResponse productSave(HttpSession session, Product product) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
         }
         if (iUserService.checkAdminRole(user).isSuccess()) {
             //填充我们增加产品的业务逻辑
@@ -54,7 +54,7 @@ public class ProductManageController {
     public ServerResponse setSaleStatus(HttpSession session, Integer productId, Integer status) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
         }
         if (iUserService.checkAdminRole(user).isSuccess()) {
             return iProductService.setSaleStatus(productId, status);
@@ -68,7 +68,7 @@ public class ProductManageController {
     public ServerResponse getDetail(HttpSession session, Integer productId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
         }
         if (iUserService.checkAdminRole(user).isSuccess()) {
             return iProductService.manageProductDetail(productId);
@@ -79,11 +79,12 @@ public class ProductManageController {
 
     @RequestMapping("list.do")
     @ResponseBody
-    public ServerResponse getList(HttpSession session, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+    public ServerResponse getList(HttpSession session,
+                                  @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                   @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
         }
         if (iUserService.checkAdminRole(user).isSuccess()) {
             return iProductService.getProductList(pageNum, pageSize);
@@ -99,7 +100,7 @@ public class ProductManageController {
                                         @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
         }
         if (iUserService.checkAdminRole(user).isSuccess()) {
             return iProductService.searchProduct(productName, productId, pageNum, pageSize);
@@ -114,7 +115,7 @@ public class ProductManageController {
                                  @RequestParam(value = "upload_file", required = false) MultipartFile file) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
+            return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
         }
         if (iUserService.checkAdminRole(user).isSuccess()) {
             String path = request.getSession().getServletContext().getRealPath("upload");
@@ -133,8 +134,9 @@ public class ProductManageController {
     @RequestMapping("richtext_img_upload.do")
     @ResponseBody
     public Map richtextImgUpload(HttpSession session,
-                                 @RequestParam(value = "upload_file", required = false) MultipartFile file,
-                                 HttpServletRequest request, HttpServletResponse response) {
+                                 HttpServletRequest request,
+                                 HttpServletResponse response,
+                                 @RequestParam(value = "upload_file", required = false) MultipartFile file) {
         Map resultMap = Maps.newHashMap();
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
