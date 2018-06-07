@@ -20,8 +20,11 @@ public class UserController {
     @Autowired
     private IUserService iUserService;
 
-    //http://localhost:8080/mmall/user/login.do
-    //yjj   123123
+    /**
+     * 登录
+     * http://localhost:8080/mmall/user/login.do
+     * yj   123123
+     */
     @RequestMapping(value = "login.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session) {
@@ -32,6 +35,18 @@ public class UserController {
         return response;
     }
 
+    /**
+     * 检验有没有该用户名
+     */
+    @RequestMapping(value = "check_username.do", method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse<String> checkValid(String str, String type) {
+        return iUserService.checkValid(str, type);
+    }
+
+    /**
+     * 注销登录
+     */
     @RequestMapping(value = "logout.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> logout(HttpSession session) {
@@ -39,21 +54,26 @@ public class UserController {
         return ServerResponse.createBySuccess();
     }
 
-    //http://localhost:8080/mmall/user/register.do?username=yjj&password=123123
-    // &email=756585379@qq.com&phone=13376275127&question=1+2=&answer=3
+    /**
+     * 注册
+     * http://localhost:8080/mmall/user/register.do
+     * username=yj
+     * password=123123
+     * email=756585379@qq.com
+     * phone=13376275127
+     * question=3
+     * answer=3
+     */
     @RequestMapping(value = "register.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> register(User user) {
         return iUserService.register(user);
     }
 
-    @RequestMapping(value = "check_valid.do", method = RequestMethod.POST)
-    @ResponseBody
-    public ServerResponse<String> checkValid(String str, String type) {
-        return iUserService.checkValid(str, type);
-    }
-
-    //http://localhost:8080/mmall/user/get_user_info.do
+    /**
+     * 获取用户信息
+     * http://localhost:8080/mmall/user/get_user_info.do
+     */
     @RequestMapping(value = "get_user_info.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> getUserInfo(HttpSession session) {
