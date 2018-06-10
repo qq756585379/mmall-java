@@ -36,9 +36,9 @@ public class UserController {
     }
 
     /**
-     * 检验有没有该用户名
+     * 检验 用户名和邮箱
      */
-    @RequestMapping(value = "check_username.do", method = RequestMethod.POST)
+    @RequestMapping(value = "check.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> checkValid(String str, String type) {
         return iUserService.checkValid(str, type);
@@ -98,12 +98,18 @@ public class UserController {
         return iUserService.checkAnswer(username, question, answer);
     }
 
+    /**
+     * 忘记密码，通过密保问题重置密码
+     */
     @RequestMapping(value = "forget_reset_password.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> forgetRestPassword(String username, String passwordNew, String forgetToken) {
         return iUserService.forgetResetPassword(username, passwordNew, forgetToken);
     }
 
+    /**
+     * 重置密码
+     */
     @RequestMapping(value = "reset_password.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> resetPassword(HttpSession session, String passwordOld, String passwordNew) {

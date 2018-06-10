@@ -61,5 +61,4 @@ public class ShippingServiceImpl implements IShippingService {
         PageInfo pageInfo = new PageInfo(shippingList);
         return ServerResponse.createBySuccess(pageInfo);
     }
-
 }

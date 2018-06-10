@@ -24,6 +24,7 @@ public class TestUploadController {
 
     @Autowired
     private IUserService iUserService;
+
     @Autowired
     private IFileService iFileService;
 

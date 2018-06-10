@@ -254,7 +254,7 @@ public class OrderServiceImpl implements IOrderService {
                     folder.mkdirs();
                 }
 
-                // 需要修改为运行机器上的路径
+                //需要修改为运行机器上的路径
                 //细节细节细节
                 String qrPath = String.format(path + "/qr-%s.png", response.getOutTradeNo());
                 String qrFileName = String.format("qr-%s.png", response.getOutTradeNo());
@@ -376,22 +376,6 @@ public class OrderServiceImpl implements IOrderService {
         return ServerResponse.createByErrorMessage("订单不存在");
     }
 
-    private List<OrderVo> assembleOrderVoList(List<Order> orderList, Integer userId) {
-        List<OrderVo> orderVoList = Lists.newArrayList();
-        for (Order order : orderList) {
-            List<OrderItem> orderItemList = Lists.newArrayList();
-            if (userId == null) {
-                //todo 管理员查询的时候 不需要传userId
-                orderItemList = orderItemMapper.getByOrderNo(order.getOrderNo());
-            } else {
-                orderItemList = orderItemMapper.getByOrderNoUserId(order.getOrderNo(), userId);
-            }
-            OrderVo orderVo = assembleOrderVo(order, orderItemList);
-            orderVoList.add(orderVo);
-        }
-        return orderVoList;
-    }
-
     private ServerResponse getCartOrderItem(Integer userId, List<Cart> cartList) {
         List<OrderItem> orderItemList = Lists.newArrayList();
         if (CollectionUtils.isEmpty(cartList)) {
@@ -418,6 +402,75 @@ public class OrderServiceImpl implements IOrderService {
             orderItemList.add(orderItem);
         }
         return ServerResponse.createBySuccess(orderItemList);
+    }
+
+    private void cleanCart(List<Cart> cartList) {
+        for (Cart cart : cartList) {
+            cartMapper.deleteByPrimaryKey(cart.getId());
+        }
+    }
+
+    private void reduceProductStock(List<OrderItem> orderItemList) {
+        for (OrderItem orderItem : orderItemList) {
+            Product product = productMapper.selectByPrimaryKey(orderItem.getProductId());
+            product.setStock(product.getStock() - orderItem.getQuantity());
+            productMapper.updateByPrimaryKeySelective(product);
+        }
+    }
+
+    private long generateOrderNo() {
+        long currentTime = System.currentTimeMillis();
+        return currentTime + new Random().nextInt(100);//0~99随机数
+    }
+
+    private BigDecimal getOrderTotalPrice(List<OrderItem> orderItemList) {
+        BigDecimal payment = new BigDecimal("0");
+        for (OrderItem orderItem : orderItemList) {
+            payment = BigDecimalUtil.add(payment.doubleValue(), orderItem.getTotalPrice().doubleValue());
+        }
+        return payment;
+    }
+
+    private List<OrderVo> assembleOrderVoList(List<Order> orderList, Integer userId) {
+        List<OrderVo> orderVoList = Lists.newArrayList();
+        for (Order order : orderList) {
+            List<OrderItem> orderItemList = Lists.newArrayList();
+            if (userId == null) {
+                //todo 管理员查询的时候 不需要传userId
+                orderItemList = orderItemMapper.getByOrderNo(order.getOrderNo());
+            } else {
+                orderItemList = orderItemMapper.getByOrderNoUserId(order.getOrderNo(), userId);
+            }
+            OrderVo orderVo = assembleOrderVo(order, orderItemList);
+            orderVoList.add(orderVo);
+        }
+        return orderVoList;
+    }
+
+    private OrderItemVo assembleOrderItemVo(OrderItem orderItem) {
+        OrderItemVo orderItemVo = new OrderItemVo();
+        orderItemVo.setOrderNo(orderItem.getOrderNo());
+        orderItemVo.setProductId(orderItem.getProductId());
+        orderItemVo.setProductName(orderItem.getProductName());
+        orderItemVo.setProductImage(orderItem.getProductImage());
+        orderItemVo.setCurrentUnitPrice(orderItem.getCurrentUnitPrice());
+        orderItemVo.setQuantity(orderItem.getQuantity());
+        orderItemVo.setTotalPrice(orderItem.getTotalPrice());
+        orderItemVo.setCreateTime(DateTimeUtil.dateToStr(orderItem.getCreateTime()));
+        return orderItemVo;
+    }
+
+    private ShippingVo assembleShippingVo(Shipping shipping) {
+        ShippingVo shippingVo = new ShippingVo();
+        shippingVo.setReceiverName(shipping.getReceiverName());
+        shippingVo.setReceiverAddress(shipping.getReceiverAddress());
+        shippingVo.setReceiverProvince(shipping.getReceiverProvince());
+        shippingVo.setReceiverCity(shipping.getReceiverCity());
+        shippingVo.setReceiverDistrict(shipping.getReceiverDistrict());
+        shippingVo.setReceiverMobile(shipping.getReceiverMobile());
+        shippingVo.setReceiverZip(shipping.getReceiverZip());
+        shippingVo.setReceiverPhone(shippingVo.getReceiverPhone());
+        return shippingVo;
     }
 
     private OrderVo assembleOrderVo(Order order, List<OrderItem> orderItemList) {
@@ -452,46 +505,6 @@ public class OrderServiceImpl implements IOrderService {
         return orderVo;
     }
 
-    private OrderItemVo assembleOrderItemVo(OrderItem orderItem) {
-        OrderItemVo orderItemVo = new OrderItemVo();
-        orderItemVo.setOrderNo(orderItem.getOrderNo());
-        orderItemVo.setProductId(orderItem.getProductId());
-        orderItemVo.setProductName(orderItem.getProductName());
-        orderItemVo.setProductImage(orderItem.getProductImage());
-        orderItemVo.setCurrentUnitPrice(orderItem.getCurrentUnitPrice());
-        orderItemVo.setQuantity(orderItem.getQuantity());
-        orderItemVo.setTotalPrice(orderItem.getTotalPrice());
-        orderItemVo.setCreateTime(DateTimeUtil.dateToStr(orderItem.getCreateTime()));
-        return orderItemVo;
-    }
-
-    private ShippingVo assembleShippingVo(Shipping shipping) {
-        ShippingVo shippingVo = new ShippingVo();
-        shippingVo.setReceiverName(shipping.getReceiverName());
-        shippingVo.setReceiverAddress(shipping.getReceiverAddress());
-        shippingVo.setReceiverProvince(shipping.getReceiverProvince());
-        shippingVo.setReceiverCity(shipping.getReceiverCity());
-        shippingVo.setReceiverDistrict(shipping.getReceiverDistrict());
-        shippingVo.setReceiverMobile(shipping.getReceiverMobile());
-        shippingVo.setReceiverZip(shipping.getReceiverZip());
-        shippingVo.setReceiverPhone(shippingVo.getReceiverPhone());
-        return shippingVo;
-    }
-
-    private void cleanCart(List<Cart> cartList) {
-        for (Cart cart : cartList) {
-            cartMapper.deleteByPrimaryKey(cart.getId());
-        }
-    }
-
-    private void reduceProductStock(List<OrderItem> orderItemList) {
-        for (OrderItem orderItem : orderItemList) {
-            Product product = productMapper.selectByPrimaryKey(orderItem.getProductId());
-            product.setStock(product.getStock() - orderItem.getQuantity());
-            productMapper.updateByPrimaryKeySelective(product);
-        }
-    }
-
     private Order assembleOrder(Integer userId, Integer shippingId, BigDecimal payment) {
         Order order = new Order();
         long orderNo = this.generateOrderNo();
@@ -509,18 +522,5 @@ public class OrderServiceImpl implements IOrderService {
             return order;
         }
         return null;
-    }
-
-    private long generateOrderNo() {
-        long currentTime = System.currentTimeMillis();
-        return currentTime + new Random().nextInt(100);//0~99随机数
-    }
-
-    private BigDecimal getOrderTotalPrice(List<OrderItem> orderItemList) {
-        BigDecimal payment = new BigDecimal("0");
-        for (OrderItem orderItem : orderItemList) {
-            payment = BigDecimalUtil.add(payment.doubleValue(), orderItem.getTotalPrice().doubleValue());
-        }
-        return payment;
     }
 }

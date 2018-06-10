@@ -76,7 +76,7 @@ public class UserServiceImpl implements IUserService {
             }
         }
 
-        return ServerResponse.createBySuccessMessage("校验成功");
+        return ServerResponse.createBySuccessMessage("该用户不存在");
     }
 
     public ServerResponse<String> selectQuestion(String username) {
@@ -103,10 +103,12 @@ public class UserServiceImpl implements IUserService {
         return ServerResponse.createByErrorMessage("问题的答案错误");
     }
 
+    //重置密码
     public ServerResponse<String> forgetResetPassword(String username, String passwordNew, String forgetToken) {
         if (org.apache.commons.lang3.StringUtils.isBlank(forgetToken)) {
             return ServerResponse.createByErrorMessage("参数错误,token需要传递");
         }
+
         //先检查该用户存在不
         int resultCount = userMapper.checkUsername(username);
         if (resultCount == 0) {
@@ -117,6 +119,7 @@ public class UserServiceImpl implements IUserService {
         if (org.apache.commons.lang3.StringUtils.isBlank(token)) {
             return ServerResponse.createByErrorMessage("token无效或者过期");
         }
+
         if (org.apache.commons.lang3.StringUtils.equals(forgetToken, token)) {
             String md5Password = MD5Util.MD5EncodeUtf8(passwordNew);
             int rowCount = userMapper.updatePasswordByUsername(username, md5Password);
@@ -135,7 +138,6 @@ public class UserServiceImpl implements IUserService {
         if (resultCount == 0) {
             return ServerResponse.createByErrorMessage("旧密码错误");
         }
-
         user.setPassword(MD5Util.MD5EncodeUtf8(passwordNew));
         int updateCount = userMapper.updateByPrimaryKeySelective(user);
         if (updateCount > 0) {

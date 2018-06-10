@@ -98,10 +98,9 @@ public class OrderController {
     @ResponseBody
     public Object alipayCallback(HttpServletRequest request) {
         Map<String, String> params = Maps.newHashMap();
-        System.out.println("params = " + params);
-
         Map requestParams = request.getParameterMap();
-        for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
+
+        for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
             String name = (String) iter.next();
             String[] values = (String[]) requestParams.get(name);
 
@@ -131,7 +130,6 @@ public class OrderController {
         }
 
         //todo 验证各种数据，还没实现
-
         ServerResponse serverResponse = iOrderService.aliCallback(params);
         if (serverResponse.isSuccess()) {
             return Const.AlipayCallback.RESPONSE_SUCCESS;
@@ -146,12 +144,10 @@ public class OrderController {
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseEnum.NEED_LOGIN.getCode(), ResponseEnum.NEED_LOGIN.getDesc());
         }
-
         ServerResponse serverResponse = iOrderService.queryOrderPayStatus(user.getId(), orderNo);
         if (serverResponse.isSuccess()) {
             return ServerResponse.createBySuccess(true);
         }
         return ServerResponse.createBySuccess(false);
     }
-
 }
