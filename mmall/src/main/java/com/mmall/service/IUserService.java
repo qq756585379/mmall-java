@@ -5,11 +5,14 @@ import com.mmall.pojo.User;
 
 public interface IUserService {
 
+    //登录
     ServerResponse<User> login(String username, String password);
 
+    //注册
     ServerResponse<String> register(User user);
 
-    ServerResponse<String> checkValid(String str, String type);
+    //检验
+    ServerResponse<String> checkValid(String str,String type);
 
     ServerResponse<String> selectQuestion(String username);
 

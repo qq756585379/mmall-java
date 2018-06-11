@@ -99,8 +99,7 @@ public class ProductServiceImpl implements IProductService {
             productListVoList.add(productListVo);
         }
         PageInfo pageResult = new PageInfo(productList);
-        //重置list
-        pageResult.setList(productListVoList);
+        pageResult.setList(productListVoList);  //重置list
         return ServerResponse.createBySuccess(pageResult);
     }
 

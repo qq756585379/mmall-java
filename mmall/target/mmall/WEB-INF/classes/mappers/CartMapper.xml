@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="com.mmall.dao.CartMapper">
     <resultMap id="BaseResultMap" type="com.mmall.pojo.Cart">
         <constructor>
@@ -12,23 +13,26 @@
             <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
         </constructor>
     </resultMap>
+
     <sql id="Base_Column_List">
     id, user_id, product_id, quantity, checked, create_time, update_time
-  </sql>
+    </sql>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
         from mmall_cart
         where id = #{id,jdbcType=INTEGER}
     </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from mmall_cart
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+      delete from mmall_cart
+      where id = #{id,jdbcType=INTEGER}
+    </delete>
 
     <insert id="insert" parameterType="com.mmall.pojo.Cart">
-    insert into mmall_cart (id, user_id, product_id, quantity, checked, create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, 
+      insert into mmall_cart (id, user_id, product_id, quantity, checked, create_time, update_time)
+      values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER},
       #{quantity,jdbcType=INTEGER}, #{checked,jdbcType=INTEGER}, now(), now())
     </insert>
 
@@ -108,15 +112,15 @@
     </update>
 
     <update id="updateByPrimaryKey" parameterType="com.mmall.pojo.Cart">
-    update mmall_cart
-    set user_id = #{userId,jdbcType=INTEGER},
+      update mmall_cart
+      set user_id = #{userId,jdbcType=INTEGER},
       product_id = #{productId,jdbcType=INTEGER},
       quantity = #{quantity,jdbcType=INTEGER},
       checked = #{checked,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = now()
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+      where id = #{id,jdbcType=INTEGER}
+    </update>
 
     <select id="selectCartByUserIdProductId" resultMap="BaseResultMap" parameterType="map">
         SELECT
@@ -134,7 +138,7 @@
     </select>
 
     <select id="selectCartProductCheckedStatusByUserId" resultType="int" parameterType="int">
-      SELECT count(1) from mmall_cart where checked = 0 and user_id = #{userId}
+        SELECT count(1) from mmall_cart where checked = 0 and user_id = #{userId}
     </select>
 
     <delete id="deleteByUserIdProductIds" parameterType="map">

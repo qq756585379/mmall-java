@@ -94,7 +94,6 @@ public class CartServiceImpl implements ICartService {
         CartVo cartVo = new CartVo();
         List<Cart> cartList = cartMapper.selectCartByUserId(userId);
         List<CartProductVo> cartProductVoList = Lists.newArrayList();
-
         BigDecimal cartTotalPrice = new BigDecimal("0");
 
         if (CollectionUtils.isNotEmpty(cartList)) {
@@ -144,7 +143,6 @@ public class CartServiceImpl implements ICartService {
         cartVo.setCartProductVoList(cartProductVoList);
         cartVo.setAllChecked(this.getAllCheckedStatus(userId));
         cartVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix"));
-
         return cartVo;
     }
 

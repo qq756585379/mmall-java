@@ -33,18 +33,20 @@
     delete from mmall_order
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
     <insert id="insert" parameterType="com.mmall.pojo.Order">
-    insert into mmall_order (id, order_no, user_id, 
+      insert into mmall_order (id, order_no, user_id,
       shipping_id, payment, payment_type, 
       postage, status, payment_time, 
       send_time, end_time, close_time, 
       create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, 
+      values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER},
       #{shippingId,jdbcType=INTEGER}, #{payment,jdbcType=DECIMAL}, #{paymentType,jdbcType=INTEGER}, 
       #{postage,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{paymentTime,jdbcType=TIMESTAMP}, 
       #{sendTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, 
       now(), now())
-  </insert>
+    </insert>
+
     <insert id="insertSelective" parameterType="com.mmall.pojo.Order">
         insert into mmall_order
         <trim prefix="(" suffix=")" suffixOverrides=",">
