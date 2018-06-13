@@ -8,14 +8,11 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * Created by geely
- */
 public class CategoryDaoTest extends TestBase {
-
 
     @Autowired
     private CategoryMapper categoryMapper;
+
     @Autowired
     private CategoryServiceImpl iCategoryService;
 
@@ -27,9 +24,9 @@ public class CategoryDaoTest extends TestBase {
         Category d4  = categoryMapper.selectByPrimaryKey(4);
         System.out.println(d4);
     }
+
     @Test
     public void testChildService(){
         iCategoryService.selectCategoryAndChildrenById(2);
     }
-
 }

@@ -31,7 +31,6 @@
     -->
 
     <dependencies>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -246,7 +245,6 @@
             <artifactId>lombok</artifactId>
             <version>1.16.18</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -296,5 +294,4 @@
             </properties>
         </profile>
     </profiles>
-
 </project>
