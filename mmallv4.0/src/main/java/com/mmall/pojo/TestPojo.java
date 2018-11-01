@@ -20,4 +20,3 @@ public class TestPojo {
         this.id = id;
     }
 }
-`

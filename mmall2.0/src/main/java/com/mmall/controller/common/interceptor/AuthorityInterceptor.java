@@ -22,6 +22,7 @@ import java.util.Map;
 
 @Slf4j
 public class AuthorityInterceptor implements HandlerInterceptor {
+
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,

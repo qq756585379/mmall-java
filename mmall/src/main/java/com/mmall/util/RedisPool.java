@@ -27,13 +27,10 @@ public class RedisPool {
     private static Boolean testOnReturn = Boolean.parseBoolean(PropertiesUtil.getProperty("redis.test.return", "true"));
 
     private static String redisIp = PropertiesUtil.getProperty("redis.ip");
-    private static int redisPort = Integer.parseInt(PropertiesUtil.getProperty("redis.port"));
+
+    private static int redisPort = Integer.parseInt(PropertiesUtil.getProperty("redis.port", "6379"));
 
     static {
-        initPool();
-    }
-
-    private static void initPool() {
         JedisPoolConfig config = new JedisPoolConfig();
         config.setMaxTotal(maxTotal);
         config.setMaxIdle(maxIdle);

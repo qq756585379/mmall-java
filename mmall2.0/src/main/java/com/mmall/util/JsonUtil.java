@@ -11,13 +11,16 @@ import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.codehaus.jackson.type.JavaType;
 import org.codehaus.jackson.type.TypeReference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@Slf4j
 public class JsonUtil {
+
+    private final static Logger log = LoggerFactory.getLogger(JsonUtil.class);
 
     //ObjectMapper是jackson提供的
     private static ObjectMapper objectMapper = new ObjectMapper();

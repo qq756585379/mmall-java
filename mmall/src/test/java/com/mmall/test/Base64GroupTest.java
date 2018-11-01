@@ -38,7 +38,6 @@ public class Base64GroupTest {
     }
 
     public static void main(String[] args) {
-        //todo execute
         String base64TestStr = "6L+Z6YO96KKr5L2g5Y+R546w5ZOH5ZKU5ZKUfn5oYXBweW1tYWxs55qEUVHnvqTlj7c6NTAwNTUwNzDvvIzmrKLov47liqDlhaV+fg==";
         System.out.println(getFromBase64(base64TestStr));
     }
