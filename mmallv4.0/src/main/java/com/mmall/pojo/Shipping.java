@@ -12,6 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Shipping {
+
     private Integer id;
 
     private Integer userId;
@@ -35,6 +36,4 @@ public class Shipping {
     private Date createTime;
 
     private Date updateTime;
-
-
 }

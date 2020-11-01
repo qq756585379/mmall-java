@@ -3,8 +3,7 @@
     <div class="form-wrapper">
       <div>用户登录</div>
       <br>
-      <el-form :model="userInfo" :rules="loginRules" :status-icon="false" ref="loginForm" label-width="100px"
-               class="demo-ruleForm login-form">
+      <el-form :model="userInfo" :rules="loginRules" :status-icon="false" ref="loginForm" label-width="100px" class="demo-ruleForm login-form">
         <el-form-item label="用户名" prop="admin">
           <el-input v-model="userInfo.admin"></el-input>
         </el-form-item>
@@ -19,7 +18,6 @@
         </el-form-item>
       </el-form>
     </div>
-
   </div>
 </template>
 
@@ -92,5 +90,4 @@
       }
     }
   }
-
 </style>

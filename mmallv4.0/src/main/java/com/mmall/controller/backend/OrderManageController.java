@@ -16,14 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by geely
- */
-
-@Controller
+@RestController
 @RequestMapping("/manage/order")
 public class OrderManageController {
 
@@ -33,7 +30,6 @@ public class OrderManageController {
     private IOrderService iOrderService;
 
     @RequestMapping("list.do")
-    @ResponseBody
     public ServerResponse<PageInfo> orderList(HttpServletRequest httpServletRequest, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
                                               @RequestParam(value = "pageSize",defaultValue = "10")int pageSize){
 
@@ -59,7 +55,6 @@ public class OrderManageController {
     }
 
     @RequestMapping("detail.do")
-    @ResponseBody
     public ServerResponse<OrderVo> orderDetail(HttpServletRequest httpServletRequest, Long orderNo){
 
 //        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
@@ -84,10 +79,7 @@ public class OrderManageController {
         return iOrderService.manageDetail(orderNo);
     }
 
-
-
     @RequestMapping("search.do")
-    @ResponseBody
     public ServerResponse<PageInfo> orderSearch(HttpServletRequest httpServletRequest, Long orderNo,@RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
                                                @RequestParam(value = "pageSize",defaultValue = "10")int pageSize){
 //        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
@@ -110,10 +102,7 @@ public class OrderManageController {
         return iOrderService.manageSearch(orderNo,pageNum,pageSize);
     }
 
-
-
     @RequestMapping("send_goods.do")
-    @ResponseBody
     public ServerResponse<String> orderSendGoods(HttpServletRequest httpServletRequest, Long orderNo){
 
 //        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
@@ -136,12 +125,4 @@ public class OrderManageController {
         //全部通过拦截器验证是否登录以及权限
         return iOrderService.manageSendGoods(orderNo);
     }
-
-
-
-
-
-
-
-
 }

@@ -11,13 +11,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-/**
- * Created by geely
- */
-@Service("iFileService")
 @Slf4j
+@Service("iFileService")
 public class FileServiceImpl implements IFileService {
-
 
     public String upload(MultipartFile file,String path){
         String fileName = file.getOriginalFilename();
@@ -54,3 +50,4 @@ public class FileServiceImpl implements IFileService {
     }
 
 }
+

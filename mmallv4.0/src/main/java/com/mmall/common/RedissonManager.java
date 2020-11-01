@@ -21,14 +21,14 @@ public class RedissonManager {
     }
 
     private static String redis1Ip = PropertiesUtil.getProperty("redis1.ip");
-    private static Integer redis1Port = Integer.parseInt(PropertiesUtil.getProperty("redis1.port"));
     private static String redis2Ip = PropertiesUtil.getProperty("redis2.ip");
-    private static Integer redis2Port = Integer.parseInt(PropertiesUtil.getProperty("redis2.port"));
+    private static Integer redis1Port = Integer.parseInt(PropertiesUtil.getProperty("redis1.port", ""));
+    private static Integer redis2Port = Integer.parseInt(PropertiesUtil.getProperty("redis2.port", ""));
 
     @PostConstruct
     private void init() {
         try {
-            config.useSingleServer().setAddress(new StringBuilder().append(redis1Ip).append(":").append(redis1Port).toString());
+            config.useSingleServer().setAddress(redis1Ip + ":" + redis1Port);
             redisson = (Redisson) Redisson.create(config);
             log.info("初始化Redisson结束");
         } catch (Exception e) {

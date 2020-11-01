@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements Serializable {
+
     private Integer id;
 
     private String username;
@@ -33,5 +34,4 @@ public class User implements Serializable {
     private Date createTime;
 
     private Date updateTime;
-
 }

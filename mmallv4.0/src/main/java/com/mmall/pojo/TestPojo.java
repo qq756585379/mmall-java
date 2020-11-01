@@ -1,7 +1,9 @@
 package com.mmall.pojo;
 
 public class TestPojo {
+
     private String name;
+
     private Integer id;
 
     public String getName() {

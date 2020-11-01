@@ -13,7 +13,10 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderItem {
+
     private Integer id;
+
+    private Integer userId;
 
     private Long orderNo;
 
@@ -32,8 +35,4 @@ public class OrderItem {
     private Date createTime;
 
     private Date updateTime;
-
-    private Integer userId;
-
-
 }

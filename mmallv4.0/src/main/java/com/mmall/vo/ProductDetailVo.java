@@ -2,12 +2,9 @@ package com.mmall.vo;
 
 import java.math.BigDecimal;
 
-/**
- * Created by geely
- */
 public class ProductDetailVo {
 
-    private Integer  id;
+    private Integer id;
     private Integer categoryId;
     private String name;
     private String subtitle;
@@ -19,8 +16,6 @@ public class ProductDetailVo {
     private Integer status;
     private String createTime;
     private String updateTime;
-
-
     private String imageHost;
     private Integer parentCategoryId;
 

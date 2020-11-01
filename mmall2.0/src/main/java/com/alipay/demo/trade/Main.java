@@ -30,11 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by liuyangkly on 15/8/9.
- * 简单main函数，用于测试当面付api
- * sdk和demo的意见和问题反馈请联系：liuyang.kly@alipay.com
- */
+
 public class Main {
     private static Log log = LogFactory.getLog(Main.class);
 

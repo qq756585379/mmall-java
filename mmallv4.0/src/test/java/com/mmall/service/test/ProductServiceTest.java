@@ -10,17 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-/**
- * Created by geely
- */
 public class ProductServiceTest extends TestBase {
 
     @Autowired
     private IProductService iProductService;
 
     @Test
-    public void testIProductService(){
-        ServerResponse<PageInfo> result =  iProductService.getProductByKeywordCategory("iphone",2,1,5,"price_desc");
+    public void testIProductService() {
+        ServerResponse<PageInfo> result = iProductService.getProductByKeywordCategory("iphone", 2, 1, 5, "price_desc");
         System.out.println(result);
     }
 

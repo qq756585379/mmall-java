@@ -29,7 +29,6 @@ import com.mmall.pojo.PayInfo;
 import com.mmall.pojo.Product;
 import com.mmall.pojo.Shipping;
 import com.mmall.service.IOrderService;
-import com.mmall.util.BigDecimalUtil;
 import com.mmall.util.DateTimeUtil;
 import com.mmall.util.FTPUtil;
 import com.mmall.util.PropertiesUtil;
@@ -545,8 +544,7 @@ public class OrderServiceImpl implements IOrderService {
     public void closeOrder(int hour) {
         Date closeDateTime = DateUtils.addHours(new Date(), -hour);
 
-        List<Order> orderList = orderMapper.selectOrderStatusByCreateTime(Const.OrderStatusEnum.NO_PAY.getCode(),
-                DateTimeUtil.dateToStr(closeDateTime));
+        List<Order> orderList = orderMapper.selectOrderStatusByCreateTime(Const.OrderStatusEnum.NO_PAY.getCode(), DateTimeUtil.dateToStr(closeDateTime));
 
         for (Order order : orderList) {
             List<OrderItem> orderItemList = orderItemMapper.getByOrderNo(order.getOrderNo());

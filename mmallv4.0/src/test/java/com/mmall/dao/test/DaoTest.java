@@ -10,9 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.sql.Timestamp;
 import java.util.Date;
 
-/**
- * Created by geely on mmall.
- */
 public class DaoTest extends TestBase {
 
     @Autowired
@@ -20,7 +17,7 @@ public class DaoTest extends TestBase {
 
     @Ignore
     @Test
-    public void testDao(){
+    public void testDao() {
         User a = new User();
         a.setPassword("111");
         a.setUsername("aaaaageely");
@@ -30,6 +27,4 @@ public class DaoTest extends TestBase {
         System.out.println(userMapper.insert(a));
         System.out.println("aaaaaaaaaaaaaa");
     }
-
-
 }

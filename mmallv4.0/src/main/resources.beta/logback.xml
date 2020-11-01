@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
-    <property name="LOG_HOME" value="${CATALINA_HOME}/logs"></property>
+    <property name="LOG_HOME" value="${CATALINA_HOME}/logs"/>
+
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoding>UTF-8</encoding>
         <encoder>
@@ -24,7 +25,6 @@
         </encoder>
     </appender>
 
-
     <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--<File>d:/mmalllog/error.log</File>-->
         <File>${LOG_HOME}/error.log</File>
@@ -44,15 +44,11 @@
         </filter>
     </appender>
 
-    <logger name="com.mmall" additivity="false" level="INFO" >
-        <appender-ref ref="mmall" />
+    <logger name="com.mmall" additivity="false" level="INFO">
+        <appender-ref ref="mmall"/>
         <appender-ref ref="console"/>
         <appender-ref ref="error"/>
     </logger>
-
-
-
-    <!-- geelynote mybatis log 日志 -->
 
     <logger name="com.mmall.dao" level="DEBUG"/>
 
@@ -70,7 +66,6 @@
     <!--<logger name="java.sql.PreparedStatement" level="DEBUG">-->
     <!--<appender-ref ref="console"/>-->
     <!--</logger>-->
-
 
     <root level="DEBUG">
         <appender-ref ref="console"/>

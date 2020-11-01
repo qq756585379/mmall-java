@@ -13,7 +13,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PreDestroy;
-import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -35,16 +34,14 @@ public class CloseOrderTask {
     public void closeOrderTaskV1() {
         log.info("关闭订单定时任务启动");
         int hour = Integer.parseInt(PropertiesUtil.getProperty("close.order.task.time.hour", "2"));
-//        iOrderService.closeOrder(hour);
+        iOrderService.closeOrder(hour);
         log.info("关闭订单定时任务结束");
-
     }
 
     //    @Scheduled(cron="0 */1 * * * ?")
     public void closeOrderTaskV2() {
         log.info("关闭订单定时任务启动");
         long lockTimeout = Long.parseLong(PropertiesUtil.getProperty("lock.timeout", "5000"));
-
         Long setnxResult = RedisShardedPoolUtil.setnx(Const.REDIS_LOCK.CLOSE_ORDER_TASK_LOCK, String.valueOf(System.currentTimeMillis() + lockTimeout));
         if (setnxResult != null && setnxResult.intValue() == 1) {
             //如果返回值是1，代表设置成功，获取锁
@@ -55,7 +52,7 @@ public class CloseOrderTask {
         log.info("关闭订单定时任务结束");
     }
 
-    @Scheduled(cron = "0 */1 * * * ?")
+    @Scheduled(cron = "0 */1 * * * ?") //这个比较完善
     public void closeOrderTaskV3() {
         log.info("关闭订单定时任务启动");
         long lockTimeout = Long.parseLong(PropertiesUtil.getProperty("lock.timeout", "5000"));
@@ -92,7 +89,7 @@ public class CloseOrderTask {
             if (getLock = lock.tryLock(0, 50, TimeUnit.SECONDS)) {
                 log.info("Redisson获取到分布式锁:{},ThreadName:{}", Const.REDIS_LOCK.CLOSE_ORDER_TASK_LOCK, Thread.currentThread().getName());
                 int hour = Integer.parseInt(PropertiesUtil.getProperty("close.order.task.time.hour", "2"));
-//                iOrderService.closeOrder(hour);
+                iOrderService.closeOrder(hour);
             } else {
                 log.info("Redisson没有获取到分布式锁:{},ThreadName:{}", Const.REDIS_LOCK.CLOSE_ORDER_TASK_LOCK, Thread.currentThread().getName());
             }

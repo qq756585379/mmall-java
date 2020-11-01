@@ -13,6 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
+
     private Integer id;
 
     private Integer categoryId;
@@ -36,6 +37,4 @@ public class Product {
     private Date createTime;
 
     private Date updateTime;
-
-
 }

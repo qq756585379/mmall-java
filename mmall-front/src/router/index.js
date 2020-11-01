@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import HelloWorld from '@/components/HelloWorld';
 import Login from '@/pages/login';
 import Regist from '@/pages/register';
 
@@ -21,11 +20,6 @@ export default new Router({
       path: '/register',
       name: '注册',
       component: Regist
-    },
-    {
-      path: '/hello',
-      name: 'HelloWorld',
-      component: HelloWorld
     }
   ]
 });

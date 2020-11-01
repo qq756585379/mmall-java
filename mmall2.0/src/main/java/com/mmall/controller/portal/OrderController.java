@@ -24,19 +24,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- * Created by geely
- */
-
 @Controller
 @RequestMapping("/order/")
 @Slf4j
 public class OrderController {
 
-
     @Autowired
     private IOrderService iOrderService;
-
 
     @RequestMapping("create.do")
     @ResponseBody

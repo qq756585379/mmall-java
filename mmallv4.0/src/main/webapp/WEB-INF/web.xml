@@ -4,7 +4,6 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          id="WebApp_ID" version="2.5">
 
-
     <!-- 二期新增重置session时间的filter -->
     <filter>
         <filter-name>sessionExpireFilter</filter-name>
@@ -15,7 +14,6 @@
         <url-pattern>*.do</url-pattern>
     </filter-mapping>
 
-
     <!--<filter>-->
         <!--<filter-name>springSessionRepositoryFilter</filter-name>-->
         <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
@@ -25,12 +23,20 @@
         <!--<url-pattern>*.do</url-pattern>-->
     <!--</filter-mapping>-->
 
-
     <!--<servlet-mapping>-->
         <!--<servlet-name>dispatcher</servlet-name>-->
         <!--<url-pattern>*.do</url-pattern>-->
     <!--</servlet-mapping>-->
 
+    <!-- springSession官方提供的，如果使用springSession -->
+    <!--<filter>-->
+    <!--<filter-name>springSessionRepositoryFilter</filter-name>-->
+    <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>springSessionRepositoryFilter</filter-name>-->
+    <!--<url-pattern>*.do</url-pattern>-->
+    <!--</filter-mapping>-->
 
 </web-app>
 
