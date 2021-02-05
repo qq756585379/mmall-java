@@ -26,8 +26,6 @@ import java.util.Map;
 @RequestMapping("/order/")
 public class OrderController {
 
-    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
-
     @Autowired
     private IOrderService iOrderService;
 
@@ -100,7 +98,7 @@ public class OrderController {
         Map<String, String> params = Maps.newHashMap();
         Map requestParams = request.getParameterMap();
 
-        for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
+        for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
             String name = (String) iter.next();
             String[] values = (String[]) requestParams.get(name);
 

@@ -71,8 +71,6 @@ public class OrderServiceImpl implements IOrderService {
         tradeService = new AlipayTradeServiceImpl.ClientBuilder().build();
     }
 
-    private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
-
     @Autowired
     private OrderMapper orderMapper;
     @Autowired
